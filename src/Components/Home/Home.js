@@ -7,7 +7,7 @@ function Home(props) {
 				<h2 className="title-header">eCapr</h2>
 			</div>
 			<div className="subtext-container">
-				<p class="subtext-header">Subtext</p>
+				<p className="subtext-header">Subtext</p>
 			</div>
 		</div>
 	);
