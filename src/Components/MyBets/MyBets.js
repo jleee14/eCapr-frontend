@@ -22,6 +22,8 @@ function MyBets(props) {
 		setShowNav(!showNav);
 	}
 
+    function resolve(event)
+
 	async function getBetData() {
 		try {
 			const response = await fetch("http://localhost:8000/bets/");
@@ -33,8 +35,12 @@ function MyBets(props) {
 					date_placed,
 					event_finish,
 					wager,
+                    odds,
+                    pot_win,
 					sport,
 					league,
+                    
+                    
 				});
 				setUserBetData(data);
 				setTableData(reduceData);
@@ -60,12 +66,12 @@ function MyBets(props) {
 				+ Add Bet
 			</button>
 			<div className="bets-container">
-				<h3>Outstanding Bets</h3>
-				<ul className="bet-list-container">
-					{userBetData.map((bet) => {
-						return <Bet key={bet.id} bet={bet} showEdit={showEditModal} />;
-					})}
-				</ul>
+				<h3>Your Bets</h3>
+				<table>
+					<tr key="header">
+                        {}
+                    </tr>
+				</table>
 			</div>
 		</div>
 	);
