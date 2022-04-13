@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Graph from "../Graph/Graph";
 import Navbar from "../Navbar/Navbar";
 
 function MyDashboard(props) {
 	const [showNav, setShowNav] = useState(false);
+	const [userBetData, setUserBetData] = useState([]);
+
 	function toggleNav(event) {
 		setShowNav(!showNav);
 	}
+	async function getUserData() {
+		try {
+			const response = await fetch("http://localhost:8000/bets/");
+			if (response.status === 200) {
+				const data = await response.json();
+				setUserBetData(data);
+			}
+		} catch (error) {
+			console.log("error");
+		}
+	}
+	useEffect(() => {
+		getUserData();
+		console.log("run useEffect");
+	}, []);
+
 	return (
 		<div className="dashboard-container">
 			<button className={showNav ? "open-nav" : "closed-nav"}>
