@@ -3,6 +3,7 @@ import CreateModal from "../CreateModal/CreateModal";
 import EditModal from "../EditModal/EditModal";
 import Navbar from "../Navbar/Navbar";
 import Bet from "../Bet/Bet";
+import API_URL from "../../apiConfig";
 
 function MyBets(props) {
 	const [addModalToggle, setAddModalToggle] = useState(false);
@@ -25,7 +26,7 @@ function MyBets(props) {
 	function resolve(event) {}
 	async function getBetData() {
 		try {
-			const response = await fetch("http://localhost:8000/bets/");
+			const response = await fetch(API_URL + "bets/");
 			if (response.status === 200) {
 				const data = await response.json();
 				const reduceData = await data.map(
@@ -63,7 +64,7 @@ function MyBets(props) {
 	useEffect(() => {
 		getBetData();
 		console.log("run useEffect");
-	}, []);
+	}, [addModalToggle]);
 	return (
 		<div className="mybets-container">
 			<button className={showNav ? "open-nav" : "closed-nav"}>
@@ -71,7 +72,7 @@ function MyBets(props) {
 				{/* favicon */}
 			</button>
 			<Navbar showNav={showNav} />
-			{addModalToggle && <CreateModal />}
+			{addModalToggle && <CreateModal showAddModal={showAddModal} />}
 			{editModalToggle && <EditModal />}
 			<button className="add-bet" onClick={showAddModal}>
 				+ Add Bet

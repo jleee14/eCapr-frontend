@@ -45,7 +45,12 @@ function Login({ handleSetLoggedIn }) {
 					<label htmlFor="username">Username: </label>
 					<input type="text" id="username" onChange={handleChange} />
 					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" required />
+					<input
+						type="password"
+						id="password"
+						onChange={handleChange}
+						required
+					/>
 					<button type="submit">Log In</button>
 				</form>
 			</div>

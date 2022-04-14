@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import MyBets from "../MyBets/MyBets";
+import API_URL from "../../apiConfig";
 
-function CreateModal(props) {
+function CreateModal({ showAddModal }) {
 	const initialState = {
 		name: "",
 		bookmaker: "",
@@ -12,6 +12,8 @@ function CreateModal(props) {
 		sport: "",
 		league: "",
 		notes: "",
+		pot_win: 0.0,
+		resolved: false,
 	};
 	const [bet, setBet] = useState(initialState);
 	const [betReturn, setBetReturn] = useState(0);
@@ -21,9 +23,21 @@ function CreateModal(props) {
 		setBet({ ...bet, [event.target.id]: event.target.value });
 	}
 
-	function handleSubmit(event) {
+	async function handleSubmit(event) {
 		event.preventDefault();
-		// API request
+		try {
+			const response = await fetch(API_URL + "bets/", {
+				method: "POST",
+				body: JSON.stringify(bet),
+				headers: {
+					Authorization: `Token ${localStorage.getItem("token")}`,
+					"content-type": "application/json",
+				},
+			});
+			if (response.status === 201) {
+				showAddModal();
+			}
+		} catch (error) {}
 	}
 
 	function calculateReturn(event) {
@@ -31,10 +45,12 @@ function CreateModal(props) {
 			let pot_win = (100 / Math.abs(event.target.value)) * bet.wager;
 			console.log("calculation ran");
 			setBetReturn(pot_win.toFixed(2));
+			setBet({ ...bet, pot_win: pot_win });
 		} else {
 			let pot_win = (event.target.value / 100) * bet.wager;
 			pot_win = pot_win.toFixed(2);
 			setBetReturn(pot_win);
+			setBet({ ...bet, pot_win: pot_win });
 		}
 	}
 	return (
@@ -147,7 +163,13 @@ function CreateModal(props) {
 					</div>
 					<div className="bet-parameter">
 						<label htmlFor="notes">Notes: </label>
-						<textarea name="notes" id="notes" cols="30" rows="6"></textarea>
+						<textarea
+							name="notes"
+							id="notes"
+							cols="30"
+							rows="6"
+							onChange={handleChange}
+						></textarea>
 					</div>
 					<div className="calculated-field">
 						<p className="pot-return">

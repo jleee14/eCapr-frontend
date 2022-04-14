@@ -60,7 +60,7 @@ function Signup(props) {
 			<form onSubmit={handleSignup}>
 				<label htmlFor="email">Email: </label>
 				<input type="email" id="email" onChange={handleChange} required />
-				<label htmlFor="username"></label>
+				<label htmlFor="username">Username: </label>
 				<input type="text" id="username" onChange={handleChange} required />
 				<label htmlFor="password">Password: </label>
 				<input type="password" id="password" onChange={handleChange} required />

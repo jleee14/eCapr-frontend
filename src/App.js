@@ -21,6 +21,14 @@ function App() {
 		localStorage.setItem("token", auth_token);
 		setLoggedIn(true);
 	}
+
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			setLoggedIn(true);
+			getUserInfo();
+		}
+	}, []);
+
 	return (
 		<>
 			<div className="nav-container">Nav Container</div>
