@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API_URL from "../../apiConfig";
+import { useNavigate, Link } from "react-router-dom";
 
 function Signup(props) {
 	const initialForm = {
@@ -9,44 +10,41 @@ function Signup(props) {
 		re_password: "",
 	};
 
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState(initialForm);
 	const [error, setError] = useState(false);
 	const [success, setSuccess] = useState(false);
+	const [signupErrors, setSignupErrors] = useState([]);
+	const [serverError, setServerError] = useState(false);
 	function handleChange(event) {
 		setFormData({ ...formData, [event.target.id]: event.target.value });
 	}
-	function handleSignup(event) {
+	async function handleSignup(event) {
 		event.preventDefault();
 		setSignupErrors([]);
 		setError(false);
 		setServerError(false);
 		try {
-			const response = await fetch(API_URL + 'users/', {
-				method: 'POST',
+			const response = await fetch(API_URL + "users/", {
+				method: "POST",
 				body: JSON.stringify(formData),
 				headers: {
-					'Content-Type': 'application/json',
+					"Content-Type": "application/json",
 				},
 			});
 			if (response.status === 201) {
-				// user was created
 				setSuccess(true);
-				// redirect to login
 				setTimeout(() => {
-					navigate('/login');
-				}, 5000);
+					navigate("/login");
+				}, 3000);
 			} else if (response.status === 400) {
-				// status 400 -- something bad about the request
-				// let user know what's wrong with their signup
 				const data = await response.json();
 				const errors = [];
 				for (const error in data) {
 					errors.push(data[error]);
 				}
-
 				setSignupErrors(errors);
 			} else {
-				// set error to true
 				setServerError(true);
 			}
 			console.log(response);
@@ -73,6 +71,19 @@ function Signup(props) {
 					onChange={handleChange}
 					required
 				/>
+				{success && (
+					<div className="sucess-signup">
+						{" "}
+						Success! Welcome to eCapr! You will be redirected shortly. Please
+						click this <Link to="/dashboard">link</Link> if you are not
+						redirected.{" "}
+					</div>
+				)}
+				{serverError && (
+					<div className="server-error-signup">
+						Oops! Something went wrong! Please try again later.
+					</div>
+				)}
 				<button type="submit">Sign Up</button>
 			</form>
 		</div>

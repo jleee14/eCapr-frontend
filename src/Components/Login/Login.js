@@ -1,41 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import API_URL from "../../apiConfig";
 
-function Login(props) {
+function Login({ handleSetLoggedIn }) {
 	const initialFormData = {
 		username: "",
 		password: "",
 	};
 	const [formData, setFormData] = useState(initialFormData);
-
+	const [error, setError] = useState(false);
+	const navigate = useNavigate();
 	function handleChange(event) {
 		setFormData({ ...formData, [event.target.id]: event.target.value });
 	}
 
-	function handleLogin(event) {
-        event.preventDefault();
+	async function handleLogin(event) {
+		event.preventDefault();
 		setError(false);
 		try {
-			const response = await fetch(API_URL + 'token/login/', {
-				method: 'POST',
+			const response = await fetch(API_URL + "token/login/", {
+				method: "POST",
 				body: JSON.stringify(formData),
 				headers: {
-					'Content-Type': 'application/json',
+					"Content-Type": "application/json",
 				},
 			});
 
 			if (response.status === 200) {
 				const data = await response.json();
 				handleSetLoggedIn(data.auth_token);
-				navigate('/');
+				setTimeout(() => {
+					navigate("/dashboard");
+				}, 5000);
 			} else if (response.status === 400) {
 				setError(true);
 			}
 		} catch (error) {}
-    }
-    function handleSetLoggedIn(auth_token) {
-        localStorage.setItem(formData.username, auth_token)
-    }
+	}
+
 	return (
 		<div className="login-container">
 			<div className="login-form-container">
