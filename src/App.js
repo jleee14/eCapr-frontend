@@ -9,6 +9,7 @@ import {
 import Home from "./Components/Home/Home";
 import MyDashboard from "./Components/MyDashboard/MyDashboard";
 import MyBets from "./Components/MyBets/MyBets";
+import Login from "./Components/Login/Login";
 
 function App() {
 	return (
@@ -21,6 +22,8 @@ function App() {
 						<Route path="/" element={<Navigate to="/home" />} />
 						<Route path="/dashboard" element={<MyDashboard />} />
 						<Route path="/bets" element={<MyBets />} />
+						<Route path="/login" element={<Login />} />
+						{/* <Route path="/signup" element={<Signup />} /> */}
 					</Routes>
 				</main>
 			</div>

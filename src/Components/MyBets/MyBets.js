@@ -22,26 +22,37 @@ function MyBets(props) {
 		setShowNav(!showNav);
 	}
 
-    function resolve(event)
-
+	function resolve(event) {}
 	async function getBetData() {
 		try {
 			const response = await fetch("http://localhost:8000/bets/");
 			if (response.status === 200) {
 				const data = await response.json();
-				const reduceData = await data.map({
-					bookmaker,
-					name,
-					date_placed,
-					event_finish,
-					wager,
-                    odds,
-                    pot_win,
-					sport,
-					league,
-                    
-                    
-				});
+				const reduceData = await data.map(
+					({
+						date_placed,
+						bookmaker,
+						name,
+						bet_type,
+						sport,
+						league,
+						event_finish,
+						wager,
+						odds,
+						pot_win,
+					}) => ({
+						date_placed,
+						bookmaker,
+						name,
+						bet_type,
+						sport,
+						league,
+						event_finish,
+						wager,
+						odds,
+						pot_win,
+					})
+				);
 				setUserBetData(data);
 				setTableData(reduceData);
 			}
@@ -69,8 +80,29 @@ function MyBets(props) {
 				<h3>Your Bets</h3>
 				<table>
 					<tr key="header">
-                        {}
-                    </tr>
+						<th>Date Placed</th>
+						<th>Bookmaker</th>
+						<th>Name</th>
+						<th>Bet Type</th>
+						<th>Sport</th>
+						<th>League</th>
+						<th>Date of Event</th>
+						<th>Wager Amount</th>
+						<th>Odds</th>
+						<th>Potential Return</th>
+						<th>Actions</th>
+					</tr>
+					{tableData.map((row) => (
+						<tr key={row.id}>
+							{Object.values(row).map((val) => (
+								<td>{val}</td>
+							))}
+							<td>
+								<button>Edit</button>
+								<button>Delete</button>
+							</td>
+						</tr>
+					))}
 				</table>
 			</div>
 		</div>
