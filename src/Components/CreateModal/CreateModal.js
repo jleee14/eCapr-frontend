@@ -137,6 +137,7 @@ function CreateModal({ showAddModal }) {
 							onChange={handleChange}
 							value={bet.sport}
 						>
+							<option value="">Choose an option below</option>
 							<option value="basketball">Basketball</option>
 							<option value="baseball">Baseball</option>
 							<option value="football">American Football</option>

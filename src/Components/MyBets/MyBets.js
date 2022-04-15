@@ -10,6 +10,7 @@ function MyBets({ userid }) {
 	const [editModalToggle, setEditModalToggle] = useState(false);
 	const [showNav, setShowNav] = useState(false);
 	const [userBetData, setUserBetData] = useState([]);
+	const [betId, setBetId] = useState(null);
 	const [userData, setUserData] = useState({});
 	const [tableData, setTableData] = useState([]);
 	const [delListen, setDelListen] = useState(false);
@@ -17,11 +18,9 @@ function MyBets({ userid }) {
 	function showAddModal(event) {
 		setAddModalToggle(!addModalToggle);
 	}
-
 	function showEditModal(event) {
-		setEditModalToggle(!addModalToggle);
+		setEditModalToggle(!editModalToggle);
 	}
-
 	function toggleNav(event) {
 		setShowNav(!showNav);
 	}
@@ -29,6 +28,8 @@ function MyBets({ userid }) {
 	function deleteLoad(event) {
 		setDelListen(!delListen);
 	}
+
+	function calculateProfit() {}
 
 	async function getUserData() {
 		try {
@@ -110,7 +111,9 @@ function MyBets({ userid }) {
 			</button>
 			<Navbar showNav={showNav} />
 			{addModalToggle && <CreateModal showAddModal={showAddModal} />}
-			{editModalToggle && <EditModal />}
+			{editModalToggle && (
+				<EditModal betId={betId} showEditModal={showEditModal} />
+			)}
 			<button className="add-bet" onClick={showAddModal}>
 				+ Add Bet
 			</button>
@@ -134,6 +137,7 @@ function MyBets({ userid }) {
 						<Bet
 							row={row}
 							showEditModal={showEditModal}
+							setBetId={setBetId}
 							deleteLoad={deleteLoad}
 						/>
 					))}

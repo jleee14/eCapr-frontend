@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import API_URL from "../../apiConfig";
 
-function Bet({ showEditModal, row, deleteLoad }) {
+function Bet({ setBetId, showEditModal, row, deleteLoad }) {
+	async function clickEdit(event) {
+		await setBetId(row.id);
+		await showEditModal();
+	}
 	async function handleDelete(event) {
 		try {
 			await fetch(API_URL + `bets/${row.id}`, {
@@ -15,6 +19,7 @@ function Bet({ showEditModal, row, deleteLoad }) {
 			console.log(error);
 		}
 	}
+
 	return (
 		<tr key={row.id}>
 			{Object.values(row)
@@ -23,7 +28,8 @@ function Bet({ showEditModal, row, deleteLoad }) {
 					<td>{val}</td>
 				))}
 			<td>
-				<button onClick={showEditModal}>Edit</button>
+				<button onClick={clickEdit}>Edit</button>
+				<button>Resolve</button>
 				<button onClick={handleDelete}>Delete</button>
 			</td>
 		</tr>
