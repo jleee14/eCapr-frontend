@@ -79,7 +79,7 @@ function MyBets() {
 
 	useEffect(() => {
 		getBetData();
-	}, [addModalToggle, editModalToggle, delListen]);
+	}, [addModalToggle, editModalToggle, resModalToggle, delListen]);
 
 	return (
 		<div className="mybets-container">
@@ -118,6 +118,7 @@ function MyBets() {
 						<Bet
 							row={row}
 							showEditModal={showEditModal}
+							showResModal={showResolveModal}
 							setBetId={setBetId}
 							deleteLoad={deleteLoad}
 						/>

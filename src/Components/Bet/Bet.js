@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import API_URL from "../../apiConfig";
 
-function Bet({ setBetId, showEditModal, row, deleteLoad }) {
+function Bet({ setBetId, showEditModal, row, deleteLoad, showResModal }) {
 	async function clickEdit(event) {
 		await setBetId(row.id);
 		await showEditModal();
+	}
+	async function clickResolve(event) {
+		await setBetId(row.id);
+		await showResModal();
 	}
 	async function handleDelete(event) {
 		try {
@@ -29,7 +33,7 @@ function Bet({ setBetId, showEditModal, row, deleteLoad }) {
 				))}
 			<td>
 				<button onClick={clickEdit}>Edit</button>
-				<button>Resolve</button>
+				<button onClick={clickResolve}>Resolve</button>
 				<button onClick={handleDelete}>Delete</button>
 			</td>
 		</tr>
