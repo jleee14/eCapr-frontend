@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Navbar(props) {
+function Navbar({ handleLogout }) {
 	return (
 		<div className="nav-container">
 			<Link to="/dashboard">
@@ -10,6 +10,7 @@ function Navbar(props) {
 			<Link to="/bets">
 				<div className="link-container">MyBets</div>
 			</Link>
+			<button onClick={handleLogout}>Logout</button>
 		</div>
 	);
 }

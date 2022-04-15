@@ -12,6 +12,7 @@ function MyBets({ userid }) {
 	const [userBetData, setUserBetData] = useState([]);
 	const [userData, setUserData] = useState({});
 	const [tableData, setTableData] = useState([]);
+	const [delListen, setDelListen] = useState(false);
 
 	function showAddModal(event) {
 		setAddModalToggle(!addModalToggle);
@@ -20,17 +21,25 @@ function MyBets({ userid }) {
 	function showEditModal(event) {
 		setEditModalToggle(!addModalToggle);
 	}
+
 	function toggleNav(event) {
 		setShowNav(!showNav);
 	}
-	async function deleteBet() {}
+
+	function deleteLoad(event) {
+		setDelListen(!delListen);
+	}
+
 	async function getUserData() {
 		try {
-			const response = await fetch(API_URL + `users/${userid}`, {
-				headers: {
-					Authorization: `Token ${localStorage.getItem("token")}`,
-				},
-			});
+			const response = await fetch(
+				API_URL + `users/${localStorage.getItem("id")}`,
+				{
+					headers: {
+						Authorization: `Token ${localStorage.getItem("token")}`,
+					},
+				}
+			);
 
 			if (response.status === 200) {
 				const data = await response.json();
@@ -42,6 +51,7 @@ function MyBets({ userid }) {
 			console.log("user data error");
 		}
 	}
+
 	async function getBetData() {
 		try {
 			const response = await fetch(API_URL + "bets/", {
@@ -63,6 +73,7 @@ function MyBets({ userid }) {
 						wager,
 						odds,
 						pot_win,
+						id,
 					}) => ({
 						date_placed,
 						bookmaker,
@@ -74,6 +85,7 @@ function MyBets({ userid }) {
 						wager,
 						odds,
 						pot_win,
+						id,
 					})
 				);
 				setUserBetData(data);
@@ -83,11 +95,13 @@ function MyBets({ userid }) {
 			console.log("error");
 		}
 	}
+
 	useEffect(() => {
 		getBetData();
 		getUserData();
 		console.log("run myBet useEffect");
-	}, [addModalToggle, editModalToggle]);
+	}, [addModalToggle, editModalToggle, delListen]);
+
 	return (
 		<div className="mybets-container">
 			<button className={showNav ? "open-nav" : "closed-nav"}>
@@ -120,7 +134,7 @@ function MyBets({ userid }) {
 						<Bet
 							row={row}
 							showEditModal={showEditModal}
-							deleteBet={deleteBet}
+							deleteLoad={deleteLoad}
 						/>
 					))}
 				</table>
