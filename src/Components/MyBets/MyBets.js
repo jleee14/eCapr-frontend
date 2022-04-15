@@ -83,11 +83,6 @@ function MyBets() {
 
 	return (
 		<div className="mybets-container">
-			<button className={showNav ? "open-nav" : "closed-nav"}>
-				Nav
-				{/* favicon */}
-			</button>
-			<Navbar showNav={showNav} />
 			{addModalToggle && <CreateModal showAddModal={showAddModal} />}
 			{editModalToggle && (
 				<EditModal betId={betId} showEditModal={showEditModal} />

@@ -92,15 +92,20 @@ function MyDashboard({ userid }) {
 
 	return (
 		<div className="dashboard-container">
-			<button className={showNav ? "open-nav" : "closed-nav"}>
-				Nav
-				{/* favicon */}
-			</button>
-			<Navbar showNav={showNav} />
 			<Graph />
 			<Metrics userData={userData} />
 			<div className="outstanding-bets-container">
-				<div className="out-table-container"></div>
+				<div className="out-table-container">
+					<table>
+						<tr key="header">
+							<th>Date Event</th>
+							<th>Name</th>
+							<th>Bet Type</th>
+							<th>Wager</th>
+							<th></th>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div className="resolved-bets-container">
 				<div className="win-container">
