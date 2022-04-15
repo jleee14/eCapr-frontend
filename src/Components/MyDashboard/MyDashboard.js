@@ -47,6 +47,7 @@ function MyDashboard({ userid }) {
 			console.log("user bet data error");
 		}
 	}
+
 	async function getUserID() {
 		try {
 			const response1 = await fetch(API_URL + "users/me", {
@@ -65,6 +66,7 @@ function MyDashboard({ userid }) {
 			console.log("user data error");
 		}
 	}
+
 	async function getUserInfo() {
 		try {
 			const response2 = await fetch(

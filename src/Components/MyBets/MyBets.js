@@ -3,15 +3,16 @@ import CreateModal from "../CreateModal/CreateModal";
 import EditModal from "../EditModal/EditModal";
 import Navbar from "../Navbar/Navbar";
 import Bet from "../Bet/Bet";
+import ResModal from "../ResModal/ResModal";
 import API_URL from "../../apiConfig";
 
-function MyBets({ userid }) {
+function MyBets() {
 	const [addModalToggle, setAddModalToggle] = useState(false);
 	const [editModalToggle, setEditModalToggle] = useState(false);
+	const [resModalToggle, setResModalToggle] = useState(false);
 	const [showNav, setShowNav] = useState(false);
 	const [userBetData, setUserBetData] = useState([]);
 	const [betId, setBetId] = useState(null);
-	const [userData, setUserData] = useState({});
 	const [tableData, setTableData] = useState([]);
 	const [delListen, setDelListen] = useState(false);
 
@@ -21,36 +22,15 @@ function MyBets({ userid }) {
 	function showEditModal(event) {
 		setEditModalToggle(!editModalToggle);
 	}
+	function showResolveModal(event) {
+		setResModalToggle(!resModalToggle);
+	}
 	function toggleNav(event) {
 		setShowNav(!showNav);
 	}
 
 	function deleteLoad(event) {
 		setDelListen(!delListen);
-	}
-
-	function calculateProfit() {}
-
-	async function getUserData() {
-		try {
-			const response = await fetch(
-				API_URL + `users/${localStorage.getItem("id")}`,
-				{
-					headers: {
-						Authorization: `Token ${localStorage.getItem("token")}`,
-					},
-				}
-			);
-
-			if (response.status === 200) {
-				const data = await response.json();
-				setUserData(data);
-				console.log("fetch user data");
-				console.log(userData);
-			}
-		} catch (error) {
-			console.log("user data error");
-		}
 	}
 
 	async function getBetData() {
@@ -99,8 +79,6 @@ function MyBets({ userid }) {
 
 	useEffect(() => {
 		getBetData();
-		getUserData();
-		console.log("run myBet useEffect");
 	}, [addModalToggle, editModalToggle, delListen]);
 
 	return (
@@ -113,6 +91,9 @@ function MyBets({ userid }) {
 			{addModalToggle && <CreateModal showAddModal={showAddModal} />}
 			{editModalToggle && (
 				<EditModal betId={betId} showEditModal={showEditModal} />
+			)}
+			{resModalToggle && (
+				<ResModal betId={betId} showResolveModal={showResolveModal} />
 			)}
 			<button className="add-bet" onClick={showAddModal}>
 				+ Add Bet
