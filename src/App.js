@@ -11,11 +11,28 @@ import MyDashboard from "./Components/MyDashboard/MyDashboard";
 import MyBets from "./Components/MyBets/MyBets";
 import Login from "./Components/Login/Login";
 import Signup from "./Components/Signup/Signup";
+import API_URL from "./apiConfig";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
-	function getUserInfo() {
-		return;
+	const [userInfo, setUserInfo] = useState({});
+
+	async function getUserInfo() {
+		try {
+			const response = await fetch(API_URL + "users/me", {
+				headers: {
+					Authorization: `Token ${localStorage.getItem("token")}`,
+				},
+			});
+
+			if (response.status === 200) {
+				const data = await response.json();
+				setUserInfo(data);
+				console.log("fetch user info");
+			}
+		} catch (error) {
+			console.log("user data error");
+		}
 	}
 	function handleSetLoggedIn(auth_token) {
 		localStorage.setItem("token", auth_token);
@@ -25,6 +42,7 @@ function App() {
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
 			setLoggedIn(true);
+			console.log("ran app useEffect");
 			getUserInfo();
 		}
 	}, []);
@@ -37,8 +55,11 @@ function App() {
 					<Routes>
 						<Route path="/home" element={<Home />} />
 						<Route path="/" element={<Navigate to="/home" />} />
-						<Route path="/dashboard" element={<MyDashboard />} />
-						<Route path="/bets" element={<MyBets />} />
+						<Route
+							path="/dashboard"
+							element={<MyDashboard userid={userInfo.id} />}
+						/>
+						<Route path="/bets" element={<MyBets userid={userInfo.id} />} />
 						<Route
 							path="/login"
 							element={<Login handleSetLoggedIn={handleSetLoggedIn} />}

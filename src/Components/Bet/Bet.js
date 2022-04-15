@@ -1,16 +1,16 @@
 import React from "react";
 
-function Bet({ showEdit, bet }) {
+function Bet({ showEditModal, row, deleteBet }) {
 	return (
-		<div className="bet-container">
-			<li>
-				{bet.name}
-				<div className="button-container">
-					<button onClick={showEdit}>Edit</button>
-					<button>Delete</button>
-				</div>
-			</li>
-		</div>
+		<tr key={row.id}>
+			{Object.values(row).map((val) => (
+				<td>{val}</td>
+			))}
+			<td>
+				<button onClick={showEditModal}>Edit</button>
+				<button>Delete</button>
+			</td>
+		</tr>
 	);
 }
 

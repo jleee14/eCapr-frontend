@@ -5,11 +5,12 @@ import Navbar from "../Navbar/Navbar";
 import Bet from "../Bet/Bet";
 import API_URL from "../../apiConfig";
 
-function MyBets(props) {
+function MyBets({ userid }) {
 	const [addModalToggle, setAddModalToggle] = useState(false);
 	const [editModalToggle, setEditModalToggle] = useState(false);
 	const [showNav, setShowNav] = useState(false);
 	const [userBetData, setUserBetData] = useState([]);
+	const [userData, setUserData] = useState({});
 	const [tableData, setTableData] = useState([]);
 
 	function showAddModal(event) {
@@ -22,11 +23,32 @@ function MyBets(props) {
 	function toggleNav(event) {
 		setShowNav(!showNav);
 	}
+	async function deleteBet() {}
+	async function getUserData() {
+		try {
+			const response = await fetch(API_URL + `users/${userid}`, {
+				headers: {
+					Authorization: `Token ${localStorage.getItem("token")}`,
+				},
+			});
 
-	function resolve(event) {}
+			if (response.status === 200) {
+				const data = await response.json();
+				setUserData(data);
+				console.log("fetch user data");
+				console.log(userData);
+			}
+		} catch (error) {
+			console.log("user data error");
+		}
+	}
 	async function getBetData() {
 		try {
-			const response = await fetch(API_URL + "bets/");
+			const response = await fetch(API_URL + "bets/", {
+				headers: {
+					Authorization: `Token ${localStorage.getItem("token")}`,
+				},
+			});
 			if (response.status === 200) {
 				const data = await response.json();
 				const reduceData = await data.map(
@@ -63,8 +85,9 @@ function MyBets(props) {
 	}
 	useEffect(() => {
 		getBetData();
-		console.log("run useEffect");
-	}, [addModalToggle]);
+		getUserData();
+		console.log("run myBet useEffect");
+	}, [addModalToggle, editModalToggle]);
 	return (
 		<div className="mybets-container">
 			<button className={showNav ? "open-nav" : "closed-nav"}>
@@ -94,15 +117,11 @@ function MyBets(props) {
 						<th>Actions</th>
 					</tr>
 					{tableData.map((row) => (
-						<tr key={row.id}>
-							{Object.values(row).map((val) => (
-								<td>{val}</td>
-							))}
-							<td>
-								<button>Edit</button>
-								<button>Delete</button>
-							</td>
-						</tr>
+						<Bet
+							row={row}
+							showEditModal={showEditModal}
+							deleteBet={deleteBet}
+						/>
 					))}
 				</table>
 			</div>
