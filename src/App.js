@@ -20,22 +20,6 @@ function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [userInfo, setUserInfo] = useState({});
 
-	// async function getUserInfo() {
-	// 	try {
-	// 		const response = await fetch(API_URL + "users/me", {
-	// 			headers: {
-	// 				Authorization: `Token ${localStorage.getItem("token")}`,
-	// 			},
-	// 		});
-
-	// 		if (response.status === 200) {
-	// 			const data = await response.json();
-	// 			setUserInfo(data);
-	// 			console.log("fetch user info");
-	// 		}
-	// 	} catch (error) {
-	// 		console.log("user data error");
-	// 	}
 	const handleLogout = async () => {
 		// destroy token POST token/logout/
 		try {
@@ -83,15 +67,16 @@ function App() {
 		if (localStorage.getItem("token")) {
 			setLoggedIn(true);
 			console.log("ran app useEffect");
-			// getUserInfo();
 		}
 	}, []);
 
 	return (
 		<>
-			<div className="nav-container">
-				<Navbar handleLogout={handleLogout} />
-			</div>
+			{loggedIn && (
+				<div className="nav-container">
+					<Navbar handleLogout={handleLogout} />
+				</div>
+			)}
 			<div className="main-container">
 				<main>
 					<Routes>

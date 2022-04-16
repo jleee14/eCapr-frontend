@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API_URL from "../../apiConfig";
+import "./Login.css";
 
 function Login({ handleSetLoggedIn }) {
 	const initialFormData = {
@@ -39,27 +40,46 @@ function Login({ handleSetLoggedIn }) {
 	}
 
 	return (
-		<div className="login-container">
-			<div className="login-form-container">
-				<form onSubmit={handleLogin}>
-					<label htmlFor="username">Username: </label>
-					<input type="text" id="username" onChange={handleChange} />
-					<label htmlFor="password">Password: </label>
-					<input
-						type="password"
-						id="password"
-						onChange={handleChange}
-						required
-					/>
-					<button type="submit">Log In</button>
-				</form>
+		<>
+			<div className="home-header-container">
+				<div className="logo-container">
+					<h2 className="logo-home">eCapr</h2>
+				</div>
 			</div>
-			<div className="signup-container">
-				<p>
-					No existing account? Sign up <Link to="/sigup">here</Link>
-				</p>
+			<div className="login-container">
+				<div className="login-form-container">
+					<h2 className="login-header">Login</h2>
+					<div className="form-form-container">
+						<form id="login-form" onSubmit={handleLogin}>
+							<label htmlFor="username">Username: </label>
+							<input
+								type="text"
+								id="username"
+								onChange={handleChange}
+								placeholder="Username"
+								required
+							/>
+							<label htmlFor="password">Password: </label>
+							<input
+								type="password"
+								id="password"
+								onChange={handleChange}
+								placeholder="Password"
+								required
+							/>
+							<button id="login-button" type="submit">
+								Log In
+							</button>
+						</form>
+					</div>
+					<div className="signup-container">
+						<p>
+							No existing eCapr account? Sign up <Link to="/sigup">here</Link>
+						</p>
+					</div>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

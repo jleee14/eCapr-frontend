@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Graph from "../Graph/Graph";
-import Navbar from "../Navbar/Navbar";
 import Metrics from "../Metrics/Metrics";
 import API_URL from "../../apiConfig";
 
@@ -25,23 +24,26 @@ function MyDashboard({ userid }) {
 			if (response.status === 200) {
 				const data = await response.json();
 				const outData = await data
-					.filter((bet) => bet.resolved === false)
-					.map(({ event_finish, bookmaker, name, wager, odds, pot_win }) => ({
+					.filter((bet) => bet.bet_result === "None")
+					.map(({ event_finish, name, bet_type, wager, odds, pot_win }) => ({
 						event_finish,
-						bookmaker,
 						name,
+						bet_type,
 						wager,
 						odds,
 						pot_win,
 					}));
-				setUserOutBetData(outData);
+				await setUserOutBetData(outData);
+				await console.log(userOutBetData);
 				const resData = await data
-					.filter((bet) => bet.resolved === true)
-					.map(({ event_finish, name }) => ({
+					.filter((bet) => bet.bet_result !== "None")
+					.map(({ event_finish, name, bet_type, profit }) => ({
 						event_finish,
 						name,
+						bet_type,
+						profit,
 					}));
-				setUserResBetData(resData);
+				await setUserResBetData(resData);
 			}
 		} catch (error) {
 			console.log("user bet data error");
@@ -96,23 +98,81 @@ function MyDashboard({ userid }) {
 			<Metrics userData={userData} />
 			<div className="outstanding-bets-container">
 				<div className="out-table-container">
+					<h3>Outstanding Bets</h3>
 					<table>
 						<tr key="header">
-							<th>Date Event</th>
+							<th>Event Date</th>
 							<th>Name</th>
 							<th>Bet Type</th>
 							<th>Wager</th>
-							<th></th>
+							<th>Odds</th>
+							<th>Pot. Return</th>
 						</tr>
+
+						{userOutBetData.map((row) => {
+							return (
+								<tr>
+									{Object.values(row).map((val) => (
+										<td>{val}</td>
+									))}
+								</tr>
+							);
+						})}
 					</table>
 				</div>
 			</div>
 			<div className="resolved-bets-container">
 				<div className="win-container">
-					<div className="win-table-container"></div>
+					<div className="win-table-container">
+						<h3>Bets Won</h3>
+						<table>
+							<thead>
+								<th>Event Date</th>
+								<th>Name</th>
+								<th>Bet Type</th>
+								<th>Profit</th>
+							</thead>
+							<tbody>
+								{userResBetData
+									.filter((bet) => bet.profit > 0)
+									.map((row) => {
+										return (
+											<tr>
+												{Object.values(row).map((val) => (
+													<td>{val}</td>
+												))}
+											</tr>
+										);
+									})}
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div className="loss-container">
-					<div className="win-table-container"></div>
+					<div className="win-table-container">
+						<h3>Bets Lost/Pushed</h3>
+						<table>
+							<thead>
+								<th>Event Date</th>
+								<th>Name</th>
+								<th>Bet Type</th>
+								<th>Profit</th>
+							</thead>
+							<tbody>
+								{userResBetData
+									.filter((bet) => bet.profit <= 0)
+									.map((row) => {
+										return (
+											<tr>
+												{Object.values(row).map((val) => (
+													<td>{val}</td>
+												))}
+											</tr>
+										);
+									})}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
