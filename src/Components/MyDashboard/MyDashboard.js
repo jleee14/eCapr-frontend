@@ -95,84 +95,95 @@ function MyDashboard({ userid }) {
 
 	return (
 		<div className="dashboard-container">
-			<Graph />
-			<Metrics userData={userData} />
-			<div className="outstanding-bets-container">
-				<div className="out-table-container">
-					<h3>Outstanding Bets</h3>
-					<table>
-						<tr key="header">
-							<th>Event Date</th>
-							<th>Name</th>
-							<th>Bet Type</th>
-							<th>Wager</th>
-							<th>Odds</th>
-							<th>Pot. Return</th>
-						</tr>
-
-						{userOutBetData.map((row) => {
-							return (
-								<tr>
-									{Object.values(row).map((val) => (
-										<td>{val}</td>
-									))}
-								</tr>
-							);
-						})}
-					</table>
-				</div>
+			<div className="dashboard-top-container">
+				<Graph />
+				<Metrics userData={userData} />
 			</div>
-			<div className="resolved-bets-container">
-				<div className="win-container">
-					<div className="win-table-container">
-						<h3>Bets Won</h3>
+			<div className="dashboard-bottom-container">
+				<div className="outstanding-bets-container">
+					<div className="out-table-container">
+						<h3 className="table-title">Outstanding Bets</h3>
 						<table>
 							<thead>
-								<th>Event Date</th>
-								<th>Name</th>
-								<th>Bet Type</th>
-								<th>Profit</th>
+								<tr>
+									<th>Event Date</th>
+									<th>Name</th>
+									<th>Bet Type</th>
+									<th>Wager</th>
+									<th>Odds</th>
+									<th>Pot. Return</th>
+								</tr>
 							</thead>
 							<tbody>
-								{userResBetData
-									.filter((bet) => bet.profit > 0)
-									.map((row) => {
-										return (
-											<tr>
-												{Object.values(row).map((val) => (
-													<td>{val}</td>
-												))}
-											</tr>
-										);
-									})}
+								{userOutBetData.map((row) => {
+									return (
+										<tr>
+											{Object.values(row).map((val) => (
+												<td>{val}</td>
+											))}
+										</tr>
+									);
+								})}
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div className="loss-container">
-					<div className="win-table-container">
-						<h3>Bets Lost/Pushed</h3>
-						<table>
-							<thead>
-								<th>Event Date</th>
-								<th>Name</th>
-								<th>Bet Type</th>
-								<th>Profit</th>
-							</thead>
-							<tbody>
-								{userResBetData
-									.filter((bet) => bet.profit <= 0)
-									.map((row) => {
-										return (
-											<tr>
-												{Object.values(row).map((val) => (
-													<td>{val}</td>
-												))}
-											</tr>
-										);
-									})}
-							</tbody>
-						</table>
+				<div className="resolved-bets-container">
+					<div className="win-container">
+						<div className="win-table-container">
+							<h3 className="table-title">Bets Won</h3>
+							<table>
+								<thead>
+									<tr>
+										<th>Event Date</th>
+										<th>Name</th>
+										<th>Bet Type</th>
+										<th>Profit</th>
+									</tr>
+								</thead>
+								<tbody>
+									{userResBetData
+										.filter((bet) => bet.profit > 0)
+										.map((row) => {
+											return (
+												<tr>
+													{Object.values(row).map((val) => (
+														<td>{val}</td>
+													))}
+												</tr>
+											);
+										})}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div className="loss-container">
+						<div className="win-table-container">
+							<h3 className="table-title">Bets Lost/Pushed</h3>
+							<table>
+								<thead>
+									<tr>
+										<th>Event Date</th>
+										<th>Name</th>
+										<th>Bet Type</th>
+										<th>Profit</th>
+									</tr>
+								</thead>
+								<tbody>
+									{userResBetData
+										.filter((bet) => bet.profit <= 0)
+										.map((row) => {
+											return (
+												<tr>
+													{Object.values(row).map((val) => (
+														<td>{val}</td>
+													))}
+												</tr>
+											);
+										})}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
