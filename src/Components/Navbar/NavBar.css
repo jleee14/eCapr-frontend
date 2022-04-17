@@ -1,0 +1,106 @@
+.nav-container {
+    position: absolute;
+    height: 100%;
+    width: 5rem;
+    z-index: 2;
+    background-color: #1D2D44;
+    transition: width .5s ease-in-out; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-stretch-container {
+    position: absolute;
+    height: 100%;
+    width: 20rem;
+    z-index: 2;
+    background-color: #1D2D44;
+    transition: width .5s ease-in-out;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+#position-nav {
+    position: absolute;
+}
+
+.user-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6rem;
+}
+
+.open-button {
+    transition: transform .5s ease-in-out;
+    padding-top: 2rem;
+}
+
+.open-extended-button {
+    transition: transform .5s ease-in-out;
+    position: relative;
+    left: 40%;
+    padding-top: 2rem;
+}
+.link-container {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 2rem 0;
+    font-weight: 700;
+}
+
+.links-container > a {
+    text-decoration: none;
+}
+
+i {
+    font-size: 2rem;
+    color: white;
+}
+
+.links-container {
+    padding-bottom: 50%;
+}
+
+.logout-container {
+    background-color: #51f1b6;
+    border: none;
+    border-radius: 2rem;
+    width: 8rem;
+    height: 2.25rem;
+    color: #1D2D44;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.circle-container {
+    border-radius: 50%;
+    background-color: #51f1b6;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.stretch-logo-container {
+    position: absolute;
+    color: white;
+    font-size: 2.5rem;
+    padding-top: 1rem;
+    font-weight: 900;
+}
+
+/* CSS STYLES */
+
+.animate__animated.animate__fadeIn {
+    --animate-duration: 1s;
+}

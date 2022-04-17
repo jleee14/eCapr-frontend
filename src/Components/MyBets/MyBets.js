@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CreateModal from "../CreateModal/CreateModal";
 import EditModal from "../EditModal/EditModal";
-import Navbar from "../Navbar/Navbar";
+import "./MyBets.css";
 import Bet from "../Bet/Bet";
 import ResModal from "../ResModal/ResModal";
 import API_URL from "../../apiConfig";
@@ -82,45 +82,47 @@ function MyBets() {
 	}, [addModalToggle, editModalToggle, resModalToggle, delListen]);
 
 	return (
-		<div className="mybets-container">
+		<>
 			{addModalToggle && <CreateModal showAddModal={showAddModal} />}
-			{editModalToggle && (
-				<EditModal betId={betId} showEditModal={showEditModal} />
-			)}
-			{resModalToggle && (
-				<ResModal betId={betId} showResolveModal={showResolveModal} />
-			)}
-			<button className="add-bet" onClick={showAddModal}>
-				+ Add Bet
-			</button>
-			<div className="bets-container">
-				<h3>Your Bets</h3>
-				<table>
-					<tr key="header">
-						<th>Date Placed</th>
-						<th>Bookmaker</th>
-						<th>Name</th>
-						<th>Bet Type</th>
-						<th>Sport</th>
-						<th>League</th>
-						<th>Date of Event</th>
-						<th>Wager Amount</th>
-						<th>Odds</th>
-						<th>Potential Return</th>
-						<th>Actions</th>
-					</tr>
-					{tableData.map((row) => (
-						<Bet
-							row={row}
-							showEditModal={showEditModal}
-							showResModal={showResolveModal}
-							setBetId={setBetId}
-							deleteLoad={deleteLoad}
-						/>
-					))}
-				</table>
+			<div className="mybets-container">
+				<button className="add-bet" onClick={showAddModal}>
+					+ Add Bet
+				</button>
+				<div className="bets-container">
+					{editModalToggle && (
+						<EditModal betId={betId} showEditModal={showEditModal} />
+					)}
+					{resModalToggle && (
+						<ResModal betId={betId} showResolveModal={showResolveModal} />
+					)}
+					<h3>Your Bets</h3>
+					<table>
+						<tr key="header">
+							<th>Date Placed</th>
+							<th>Bookmaker</th>
+							<th>Name</th>
+							<th>Bet Type</th>
+							<th>Sport</th>
+							<th>League</th>
+							<th>Date of Event</th>
+							<th>Wager Amount</th>
+							<th>Odds</th>
+							<th>Potential Return</th>
+							<th>Actions</th>
+						</tr>
+						{tableData.map((row) => (
+							<Bet
+								row={row}
+								showEditModal={showEditModal}
+								showResModal={showResolveModal}
+								setBetId={setBetId}
+								deleteLoad={deleteLoad}
+							/>
+						))}
+					</table>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

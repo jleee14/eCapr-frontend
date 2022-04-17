@@ -28,13 +28,13 @@ function EditModal({ betId, showEditModal }) {
 	}
 
 	function calculateReturn(event) {
-		if (event.target.value < -99) {
-			let pot_win = (100 / Math.abs(event.target.value)) * bet.wager;
+		if (bet.odds < -99) {
+			let pot_win = (100 / Math.abs(bet.odds)) * bet.wager;
 			console.log("calculation ran");
 			setBetReturn(pot_win.toFixed(2));
 			setBet({ ...bet, pot_win: pot_win });
 		} else {
-			let pot_win = (event.target.value / 100) * bet.wager;
+			let pot_win = (bet.odds / 100) * bet.wager;
 			pot_win = pot_win.toFixed(2);
 			setBetReturn(pot_win);
 			setBet({ ...bet, pot_win: pot_win });
@@ -129,6 +129,7 @@ function EditModal({ betId, showEditModal }) {
 							id="wager"
 							value={bet.wager}
 							onChange={handleChange}
+							onBlur={calculateReturn}
 							required
 						/>
 					</div>

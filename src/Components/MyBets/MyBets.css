@@ -1,0 +1,30 @@
+.mybets-container {
+    padding-left: 5rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.bets-container {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 2rem 1rem;
+}
+
+.bets-container > h3 {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 900;
+    
+}
+
+.add-bet {
+    position: absolute;
+    bottom: 90%;
+}

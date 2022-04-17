@@ -32,7 +32,7 @@ function Login({ handleSetLoggedIn }) {
 				handleSetLoggedIn(data.auth_token);
 				setTimeout(() => {
 					navigate("/dashboard");
-				}, 5000);
+				}, 3000);
 			} else if (response.status === 400) {
 				setError(true);
 			}
@@ -72,9 +72,9 @@ function Login({ handleSetLoggedIn }) {
 							</button>
 						</form>
 					</div>
-					<div className="signup-container">
+					<div className="signup-message-container">
 						<p>
-							No existing eCapr account? Sign up <Link to="/sigup">here</Link>
+							No existing eCapr account? Sign up <Link to="/signup">here</Link>
 						</p>
 					</div>
 				</div>

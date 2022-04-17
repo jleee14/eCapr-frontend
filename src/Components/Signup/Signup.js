@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API_URL from "../../apiConfig";
 import { useNavigate, Link } from "react-router-dom";
+import "./Signup.css";
 
 function Signup(props) {
 	const initialForm = {
@@ -55,38 +56,70 @@ function Signup(props) {
 		return;
 	}
 	return (
-		<div className="signup-container">
-			<h3>Sign up for eCapr</h3>
-			<form onSubmit={handleSignup}>
-				<label htmlFor="email">Email: </label>
-				<input type="email" id="email" onChange={handleChange} required />
-				<label htmlFor="username">Username: </label>
-				<input type="text" id="username" onChange={handleChange} required />
-				<label htmlFor="password">Password: </label>
-				<input type="password" id="password" onChange={handleChange} required />
-				<label htmlFor="re_password">Re-enter password: </label>
-				<input
-					type="password"
-					id="re_password"
-					onChange={handleChange}
-					required
-				/>
-				{success && (
-					<div className="sucess-signup">
-						{" "}
-						Success! Welcome to eCapr! You will be redirected shortly. Please
-						click this <Link to="/dashboard">link</Link> if you are not
-						redirected.{" "}
+		<>
+			<div className="home-header-container">
+				<div className="logo-container">
+					<h2 className="logo-home">eCapr</h2>
+				</div>
+			</div>
+			<div className="signup-container">
+				<div className="signup-form-container">
+					<h2 className="signup-message">Sign Up for eCapr</h2>
+					<div className="form-form-container">
+						<form id="signup-form" onSubmit={handleSignup}>
+							<label htmlFor="email">Email: </label>
+							<input
+								type="email"
+								id="email"
+								onChange={handleChange}
+								placeholder="Email"
+								required
+							/>
+							<label htmlFor="username">Username: </label>
+							<input
+								type="text"
+								id="username"
+								onChange={handleChange}
+								placeholder="Username"
+								required
+							/>
+							<label htmlFor="password">Password: </label>
+							<input
+								type="password"
+								id="password"
+								onChange={handleChange}
+								placeholder="Password"
+								required
+							/>
+							<label htmlFor="re_password">Re-enter password: </label>
+							<input
+								type="password"
+								id="re_password"
+								onChange={handleChange}
+								placeholder="Re-enter password"
+								required
+							/>
+							{success && (
+								<div className="success-signup">
+									{" "}
+									Success! Welcome to eCapr! You will be redirected shortly.
+									Please click this <Link to="/dashboard">link</Link> if you are
+									not redirected.{" "}
+								</div>
+							)}
+							{serverError && (
+								<div className="server-error-signup">
+									Oops! Something went wrong! Please try again later.
+								</div>
+							)}
+							<button className="signup-button" type="submit">
+								Sign Up
+							</button>
+						</form>
 					</div>
-				)}
-				{serverError && (
-					<div className="server-error-signup">
-						Oops! Something went wrong! Please try again later.
-					</div>
-				)}
-				<button type="submit">Sign Up</button>
-			</form>
-		</div>
+				</div>
+			</div>
+		</>
 	);
 }
 

@@ -3,7 +3,7 @@ import React from "react";
 function Graph(props) {
 	return (
 		<div className="graph-container">
-			<h3>Graph</h3>
+			<h3>Graph Placeholder</h3>
 		</div>
 	);
 }

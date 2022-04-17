@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Graph from "../Graph/Graph";
 import Metrics from "../Metrics/Metrics";
 import API_URL from "../../apiConfig";
+import "./MyDashboard.css";
 
 function MyDashboard({ userid }) {
 	const [showNav, setShowNav] = useState(false);

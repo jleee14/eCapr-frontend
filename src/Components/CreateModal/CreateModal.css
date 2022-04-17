@@ -1,0 +1,116 @@
+.modal-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    min-width: 35rem;
+    height: 60%;
+    min-height: 30rem;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 1.5rem;
+}
+
+form {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-data-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.header-container > h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+}
+
+.header-container {
+    width: 100%;
+    height: 15%;
+    background-color: #1D2D44;
+    border-radius: 1.5rem 1.5rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form > .bet-parameter {
+    display: inline-flex;
+    margin: .5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.bet-parameter > .number-input {
+    width: 5rem;
+}
+
+.bet-parameter > #league, #bookmaker {
+    width: 8rem;
+}
+
+.bet-parameter> #event_finish {
+    width: 10rem;
+}
+
+.bet-parameter > input {
+    width: 12rem;
+    height: 1.5rem;
+    border-radius: .75rem;
+    border: 1px solid #1D2D44;
+    padding-left: .5rem;
+}
+
+.bet-parameter > select {
+    border-radius: .75rem;
+    border: 1px solid #1D2D44;
+}
+
+.bet-parameter {
+    display: flex;
+    align-items: center;
+}
+
+textarea {
+    border-radius: .75rem;
+    border: 1px solid #1D2D44;
+    padding: .5rem;
+    font-size: .75rem;
+}
+
+label {
+    padding-right: .5rem;
+}
+
+p {
+    padding: 1rem 0;
+    text-align: right;
+    display: block;
+    align-self: flex-end;
+}
+
+.form-submit-button {
+    background-color: #51f1b6;
+    border: none;
+    border-radius: 2rem;
+    width: 8rem;
+    height: 2.25rem;
+    color: #1D2D44;
+    cursor: pointer;
+    font-weight: 700;
+}

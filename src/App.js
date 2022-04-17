@@ -31,11 +31,8 @@ function App() {
 			});
 
 			if (response.status === 204) {
-				// set logged in to false
 				setLoggedIn(false);
-				// clear user data
 				setUserInfo(null);
-				// remove token from local storage
 				localStorage.removeItem("token");
 				alert("You have been logged out!");
 				navigate("/login");
@@ -57,8 +54,8 @@ function App() {
 			});
 			if (response.status === 200) {
 				const data = await response.json();
-				console.log("save local storage");
-				localStorage.setItem("id", data.id);
+				await localStorage.setItem("id", data.id);
+				setUserInfo(data);
 			}
 		} catch (error) {}
 	}
@@ -72,11 +69,7 @@ function App() {
 
 	return (
 		<>
-			{loggedIn && (
-				<div className="nav-container">
-					<Navbar handleLogout={handleLogout} />
-				</div>
-			)}
+			{loggedIn && <Navbar handleLogout={handleLogout} userInfo={userInfo} />}
 			<div className="main-container">
 				<main>
 					<Routes>
