@@ -84,17 +84,17 @@ function MyBets() {
 	return (
 		<>
 			{addModalToggle && <CreateModal showAddModal={showAddModal} />}
+			{editModalToggle && (
+				<EditModal betId={betId} showEditModal={showEditModal} />
+			)}
+			{resModalToggle && (
+				<ResModal betId={betId} showResolveModal={showResolveModal} />
+			)}
 			<div className="mybets-container">
 				<button className="add-bet" onClick={showAddModal}>
 					+ Add Bet
 				</button>
 				<div className="bets-container">
-					{editModalToggle && (
-						<EditModal betId={betId} showEditModal={showEditModal} />
-					)}
-					{resModalToggle && (
-						<ResModal betId={betId} showResolveModal={showResolveModal} />
-					)}
 					<h3>Your Bets</h3>
 					<table>
 						<tr key="header">

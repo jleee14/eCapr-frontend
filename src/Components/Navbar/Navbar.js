@@ -44,7 +44,10 @@ function Navbar({ handleLogout, userInfo }) {
 						{isExtended ? (
 							"MyDashboard"
 						) : (
-							<i className="fa-solid fa-chart-line"></i>
+							<div className="short-link-container">
+								<i className="fa-solid fa-chart-line"></i>
+								<div className="small-text-container">Dashboard</div>
+							</div>
 						)}
 					</div>
 				</Link>
@@ -53,13 +56,19 @@ function Navbar({ handleLogout, userInfo }) {
 						{isExtended ? (
 							"MyBets"
 						) : (
-							<i class="fa-solid fa-money-check-dollar"></i>
+							<div className="short-link-container">
+								<i class="fa-solid fa-money-check-dollar"></i>
+								<div className="small-text-container">Bets</div>
+							</div>
 						)}
 					</div>
 				</Link>
 				{!isExtended && (
 					<div className="link-container" onClick={handleLogout}>
-						<i class="fa-solid fa-right-from-bracket"></i>
+						<div className="short-link-container">
+							<i class="fa-solid fa-right-from-bracket"></i>
+							<div className="small-text-container">Logout</div>
+						</div>
 					</div>
 				)}
 			</div>

@@ -100,6 +100,7 @@ function CreateModal({ showAddModal }) {
 								onChange={handleChange}
 								value={bet.bet_type}
 							>
+								<option value="">Select Bet Type</option>
 								<option value="parlay">Parlay</option>
 								<option value="future">Futures</option>
 								<option value="moneyline">Money Line</option>

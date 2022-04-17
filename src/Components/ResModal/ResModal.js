@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API_URL from "../../apiConfig";
+import "./ResModal.css";
 
 function ResModal({ betId, showResolveModal }) {
 	const [bet, setBet] = useState({});
@@ -56,35 +57,47 @@ function ResModal({ betId, showResolveModal }) {
 
 	return (
 		<div className="modal-container">
-			<div className="form-container">
-				<h3>Resolve Bet</h3>
-				<div
-					className="resolution-container"
-					onClick={() => calculateProfit("win")}
-				>
-					Win
+			<div className="form-container" id="resform">
+				<div className="header-container">
+					<h3>Resolve Bet</h3>
 				</div>
-				<div
-					className="resolution-container"
-					onClick={() => calculateProfit("loss")}
-				>
-					Loss
+				<div className="resolution-container">
+					<div
+						className="res-containers"
+						onClick={() => calculateProfit("win")}
+					>
+						Win
+					</div>
+					<div
+						className="res-containers"
+						onClick={() => calculateProfit("loss")}
+					>
+						Loss
+					</div>
+					<div
+						className="res-containers"
+						onClick={() => calculateProfit("push")}
+					>
+						Push
+					</div>
 				</div>
-				<div
-					className="resolution-container"
-					onClick={() => calculateProfit("push")}
-				>
-					Push
-				</div>
-				<p>
+				<p id="profit-msg">
 					Recorded Profit: <span className="result-container">${profit}</span>
 				</p>
-				<p>
-					Warning: to avoid cheating and to encourage honesty, you will not be
-					able to edit, delete, or undo bet resolutions once they have been
-					saved. Make sure your entry is correct before saving!
-				</p>
-				<button onClick={sendResolve}>Resolve Bet</button>
+				<div className="warning-msg-container">
+					<p>
+						Warning: to avoid cheating and to encourage honesty, you will not be
+						able to edit, delete, or undo bet resolutions once they have been
+						saved. Make sure your entry is correct before saving!
+					</p>
+				</div>
+				<button
+					className="form-submit-button"
+					id="resolve-button"
+					onClick={sendResolve}
+				>
+					Resolve Bet
+				</button>
 			</div>
 		</div>
 	);

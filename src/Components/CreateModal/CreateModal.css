@@ -11,9 +11,11 @@
     top: 50%;
     left: 50%;
     width: 50%;
-    min-width: 35rem;
+    min-width: 40rem;
+    max-width: 45rem;
     height: 60%;
     min-height: 30rem;
+    max-height: 35rem;
     transform: translate(-50%, -50%);
     background-color: white;
     border-radius: 1.5rem;
@@ -21,17 +23,17 @@
 
 form {
     padding: 1.5rem;
+    height: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .form-data-container {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    align-items: center;
 }
 
 .header-container > h3 {
@@ -97,11 +99,10 @@ label {
     padding-right: .5rem;
 }
 
-p {
+.calculated-field {
     padding: 1rem 0;
-    text-align: right;
-    display: block;
     align-self: flex-end;
+
 }
 
 .form-submit-button {
