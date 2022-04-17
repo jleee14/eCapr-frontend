@@ -1,7 +1,6 @@
 .mybets-container {
     padding-left: 7rem;
-    padding-bottom: 2rem;
-    padding-top: 2rem;
+    padding-bottom: 1rem;
     padding-right: 1rem;
     height: 100%;
     display: flex;
@@ -10,22 +9,62 @@
     position: relative;
 }
 
+.mybets-header-container {
+    position: relative;
+}
+
+.header-table > tr > th {
+    border-bottom: 2px solid #1D2D44;
+    font-size: .75rem;
+    padding: .25rem;
+}
+
+tbody > tr:hover {
+    background-color: #f4f6fa;
+}
+
+tr > td {
+    padding: .25rem;
+}
+
+table {
+    border-collapse: collapse;
+}
+
 .bets-container {
     height: 100%;
     width: 100%;
     background-color: white;
     border-radius: 1.5rem;
-    padding: 2rem 1rem;
+    padding: 0.5rem 1rem;
+    border: .5px solid #b6b5c0;
+    box-shadow: 0 0 .75rem #b6b5c0;
+    overflow: auto;
 }
 
 .bets-container > h3 {
     font-size: 2rem;
     text-align: center;
     font-weight: 900;
-    
 }
 
 .add-bet {
     position: absolute;
-    bottom: 90%;
+    top: 40%;
+    left: 1rem;
+    background-color: #51f1b6;
+    color:#1D2D44;
+    font-weight: 700;
+    border: none;
+    border-radius: 1.25rem;
+    margin: .125rem .25rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+}
+
+.mybet-header {
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 1.25rem 0;
+    font-weight: 900;
 }

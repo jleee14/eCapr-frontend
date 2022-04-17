@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API_URL from "../../apiConfig";
+import "./Bet.css";
 
 function Bet({ setBetId, showEditModal, row, deleteLoad, showResModal }) {
 	async function clickEdit(event) {
@@ -32,9 +33,15 @@ function Bet({ setBetId, showEditModal, row, deleteLoad, showResModal }) {
 					<td>{val}</td>
 				))}
 			<td>
-				<button onClick={clickEdit}>Edit</button>
-				<button onClick={clickResolve}>Resolve</button>
-				<button onClick={handleDelete}>Delete</button>
+				<button className="table-button" onClick={clickEdit}>
+					Edit
+				</button>
+				<button className="table-button" onClick={clickResolve}>
+					Resolve
+				</button>
+				<button className="table-button" onClick={handleDelete}>
+					Delete
+				</button>
 			</td>
 		</tr>
 	);

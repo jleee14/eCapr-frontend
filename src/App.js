@@ -21,7 +21,6 @@ function App() {
 	const [userInfo, setUserInfo] = useState({});
 
 	const handleLogout = async () => {
-		// destroy token POST token/logout/
 		try {
 			const response = await fetch(API_URL + "token/logout/", {
 				method: "POST",

@@ -54,6 +54,7 @@ function MyBets() {
 						wager,
 						odds,
 						pot_win,
+						notes,
 						id,
 					}) => ({
 						date_placed,
@@ -66,6 +67,7 @@ function MyBets() {
 						wager,
 						odds,
 						pot_win,
+						notes,
 						id,
 					})
 				);
@@ -91,34 +93,41 @@ function MyBets() {
 				<ResModal betId={betId} showResolveModal={showResolveModal} />
 			)}
 			<div className="mybets-container">
-				<button className="add-bet" onClick={showAddModal}>
-					+ Add Bet
-				</button>
+				<div className="mybets-header-container">
+					<h3 className="mybet-header">MyBets</h3>
+					<button className="add-bet" onClick={showAddModal}>
+						+ Add Bet
+					</button>
+				</div>
 				<div className="bets-container">
-					<h3>Your Bets</h3>
 					<table>
-						<tr key="header">
-							<th>Date Placed</th>
-							<th>Bookmaker</th>
-							<th>Name</th>
-							<th>Bet Type</th>
-							<th>Sport</th>
-							<th>League</th>
-							<th>Date of Event</th>
-							<th>Wager Amount</th>
-							<th>Odds</th>
-							<th>Potential Return</th>
-							<th>Actions</th>
-						</tr>
-						{tableData.map((row) => (
-							<Bet
-								row={row}
-								showEditModal={showEditModal}
-								showResModal={showResolveModal}
-								setBetId={setBetId}
-								deleteLoad={deleteLoad}
-							/>
-						))}
+						<thead className="header-table">
+							<tr>
+								<th>Date Placed</th>
+								<th>Bookmaker</th>
+								<th>Name</th>
+								<th>Bet Type</th>
+								<th>Sport</th>
+								<th>League</th>
+								<th>Date of Event</th>
+								<th>Wager Amount</th>
+								<th>Odds</th>
+								<th>Potential Return</th>
+								<th>Notes</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{tableData.map((row) => (
+								<Bet
+									row={row}
+									showEditModal={showEditModal}
+									showResModal={showResolveModal}
+									setBetId={setBetId}
+									deleteLoad={deleteLoad}
+								/>
+							))}
+						</tbody>
 					</table>
 				</div>
 			</div>

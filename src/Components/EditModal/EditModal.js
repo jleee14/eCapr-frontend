@@ -27,17 +27,16 @@ function EditModal({ betId, showEditModal }) {
 		} catch (error) {}
 	}
 
-	function calculateReturn(event) {
+	async function calculateReturn(event) {
 		if (bet.odds < -99) {
-			let pot_win = (100 / Math.abs(bet.odds)) * bet.wager;
-			console.log("calculation ran");
-			setBetReturn(pot_win.toFixed(2));
-			setBet({ ...bet, pot_win: pot_win });
+			let pot_win = (await (100 / Math.abs(bet.odds))) * bet.wager;
+			await setBetReturn(pot_win.toFixed(2));
+			await setBet({ ...bet, pot_win: pot_win });
 		} else {
-			let pot_win = (bet.odds / 100) * bet.wager;
-			pot_win = pot_win.toFixed(2);
-			setBetReturn(pot_win);
-			setBet({ ...bet, pot_win: pot_win });
+			let pot_win = (await (bet.odds / 100)) * bet.wager;
+			pot_win = await pot_win.toFixed(2);
+			await setBetReturn(pot_win);
+			await setBet({ ...bet, pot_win: pot_win });
 		}
 	}
 
@@ -181,6 +180,7 @@ function EditModal({ betId, showEditModal }) {
 								cols="35"
 								rows="7"
 								onChange={handleChange}
+								value={bet.notes}
 							></textarea>
 						</div>
 					</div>

@@ -39,7 +39,7 @@
     color:#1D2D44;
 }
 
-#profit-msg, span {
+#profit-msg, .result-container {
     font-size: 1.5rem;
     text-align: center;
 }

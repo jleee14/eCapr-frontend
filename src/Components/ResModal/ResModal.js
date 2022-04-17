@@ -21,7 +21,7 @@ function ResModal({ betId, showResolveModal }) {
 
 	function calculateProfit(result) {
 		if (result === "win") {
-			const wProfit = bet.pot_win - bet.wager;
+			const wProfit = bet.pot_win;
 			setProfit(wProfit);
 			setBet({ ...bet, profit: wProfit, bet_result: result });
 		} else if (result === "loss") {
