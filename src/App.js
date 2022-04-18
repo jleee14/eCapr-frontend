@@ -45,7 +45,9 @@ function App() {
 	async function handleSetLoggedIn(auth_token) {
 		try {
 			localStorage.setItem("token", auth_token);
-			await setLoggedIn(true);
+			await setTimeout(() => {
+				setLoggedIn(true);
+			}, 1500);
 			const response = await fetch(API_URL + "users/me", {
 				headers: {
 					Authorization: `Token ${localStorage.getItem("token")}`,
@@ -54,6 +56,7 @@ function App() {
 			if (response.status === 200) {
 				const data = await response.json();
 				await localStorage.setItem("id", data.id);
+				await localStorage.setItem("user", data.username);
 				setUserInfo(data);
 			}
 		} catch (error) {}
@@ -61,7 +64,9 @@ function App() {
 
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
-			setLoggedIn(true);
+			setTimeout(() => {
+				setLoggedIn(true);
+			}, 1000);
 			console.log("ran app useEffect");
 		}
 	}, []);
@@ -72,14 +77,33 @@ function App() {
 			<div className="main-container">
 				<main>
 					<Routes>
-						<Route path="/home" element={<Home />} />
-						<Route path="/" element={<Navigate to="/home" />} />
-						<Route path="/dashboard" element={<MyDashboard />} />
-						<Route path="/bets" element={<MyBets />} />
+						{loggedIn ? (
+							<Route path="/home" element={<Navigate to="/dashboard" />} />
+						) : (
+							<Route path="/home" element={<Home />} />
+						)}
+						{loggedIn ? (
+							<Route path="/" element={<Navigate to="/dashboard" />} />
+						) : (
+							<Route path="/" element={<Navigate to="/home" />} />
+						)}
 						<Route
-							path="/login"
-							element={<Login handleSetLoggedIn={handleSetLoggedIn} />}
+							path="/dashboard"
+							element={<MyDashboard loggedIn={loggedIn} />}
 						/>
+						{loggedIn ? (
+							<Route path="/bets" element={<MyBets />} />
+						) : (
+							<Route path="/bets" element={<Navigate to="/home" />} />
+						)}
+						{loggedIn ? (
+							<Route path="/login" element={<Navigate to="/dashboard" />} />
+						) : (
+							<Route
+								path="/login"
+								element={<Login handleSetLoggedIn={handleSetLoggedIn} />}
+							/>
+						)}
 						<Route path="/signup" element={<Signup />} />
 					</Routes>
 				</main>

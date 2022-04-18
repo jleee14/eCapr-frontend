@@ -99,12 +99,14 @@ function Graph({ betData }) {
 	}, [betData]);
 
 	useEffect(() => {
-		document.addEventListener("resize", () => {
-			setDimensions({
-				width: window.innerWidth,
-				height: window.innerHeight,
+		document
+			.querySelector(".graph-container")
+			.addEventListener("resize", () => {
+				setDimensions({
+					width: document.querySelector(".graph-container").innerWidth,
+					height: document.querySelector(".graph-container").innerHeight,
+				});
 			});
-		});
 		if (update.current) {
 			d3.selectAll("g").remove();
 		} else {

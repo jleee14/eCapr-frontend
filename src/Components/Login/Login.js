@@ -32,7 +32,7 @@ function Login({ handleSetLoggedIn }) {
 				handleSetLoggedIn(data.auth_token);
 				setTimeout(() => {
 					navigate("/dashboard");
-				}, 3000);
+				}, 2000);
 			} else if (response.status === 400) {
 				setError(true);
 			}
