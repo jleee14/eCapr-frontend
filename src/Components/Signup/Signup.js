@@ -48,9 +48,7 @@ function Signup(props) {
 			} else {
 				setServerError(true);
 			}
-			console.log(response);
 		} catch (error) {
-			console.log(error);
 			setServerError(true);
 		}
 		return;

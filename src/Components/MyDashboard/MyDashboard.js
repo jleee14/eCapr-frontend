@@ -43,7 +43,6 @@ function MyDashboard() {
 					}))
 					.sort((a, b) => new Date(b.event_finish) - new Date(a.event_finish));
 				await setUserOutBetData(outData);
-				await console.log(userOutBetData);
 				const resData = await data
 					.filter((bet) => bet.bet_result !== "None")
 					.map(({ event_finish, name, bet_type, profit }) => ({
@@ -70,13 +69,9 @@ function MyDashboard() {
 			if (response1.status === 200) {
 				const data = await response1.json();
 				await setUserId(data.id);
-				await console.log(data);
-				await console.log("user ID");
 				await getUserInfo();
 			}
-		} catch (error) {
-			console.log("user data error");
-		}
+		} catch (error) {}
 	}
 
 	async function getUserInfo() {
@@ -91,7 +86,6 @@ function MyDashboard() {
 			);
 			if (response2.status === 200) {
 				const data = await response2.json();
-				console.log("user info");
 				await setUserData(data);
 			}
 		} catch (error) {}
@@ -116,7 +110,6 @@ function MyDashboard() {
 	useEffect(() => {
 		getBetData();
 		getUserID();
-		console.log("run dashboard useEffect");
 	}, []);
 
 	useEffect(() => {

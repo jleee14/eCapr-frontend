@@ -10,7 +10,6 @@ function MyBets() {
 	const [addModalToggle, setAddModalToggle] = useState(false);
 	const [editModalToggle, setEditModalToggle] = useState(false);
 	const [resModalToggle, setResModalToggle] = useState(false);
-	const [userBetData, setUserBetData] = useState([]);
 	const [betId, setBetId] = useState(null);
 	const [tableData, setTableData] = useState([]);
 	const [delListen, setDelListen] = useState(false);
@@ -36,16 +35,14 @@ function MyBets() {
 				const userWins = await tableData.filter(
 					(bet) => bet.bet_result === "win"
 				).length;
-				await console.log(userWins);
+
 				const userLosses = await tableData.filter(
 					(bet) => bet.bet_result === "loss"
 				).length;
-				await console.log(userLosses);
+
 				const userPushes = await tableData.filter(
 					(bet) => bet.bet_result === "push"
 				).length;
-				await console.log(userPushes);
-				await console.log("set data");
 
 				const response = await fetch(API_URL + `users/me/`, {
 					method: "PATCH",
@@ -66,7 +63,6 @@ function MyBets() {
 				}
 				return;
 			} else {
-				console.log("empty data");
 				return;
 			}
 		} catch (error) {}
@@ -119,9 +115,7 @@ function MyBets() {
 					.sort(function (a, b) {
 						return new Date(a.date_placed) - new Date(b.date_placed);
 					});
-				await console.log("reduce data");
 				await setTableData(reduceData);
-				await console.log(tableData);
 			})
 			.catch((err) => {
 				console.log(err);
