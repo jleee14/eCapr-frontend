@@ -40,7 +40,8 @@ function MyDashboard() {
 						wager,
 						odds,
 						pot_win,
-					}));
+					}))
+					.sort((a, b) => new Date(b.event_finish) - new Date(a.event_finish));
 				await setUserOutBetData(outData);
 				await console.log(userOutBetData);
 				const resData = await data
@@ -50,7 +51,8 @@ function MyDashboard() {
 						name,
 						bet_type,
 						profit,
-					}));
+					}))
+					.sort((a, b) => new Date(b.event_finish) - new Date(a.event_finish));
 				await setUserResBetData(resData);
 			}
 		} catch (error) {
@@ -124,7 +126,7 @@ function MyDashboard() {
 	return (
 		<div className="dashboard-container">
 			<div className="dashboard-top-container">
-				<Graph />
+				<Graph betData={betData} />
 				<Metrics userData={userData} userStats={userStats} />
 			</div>
 			<div className="dashboard-bottom-container">

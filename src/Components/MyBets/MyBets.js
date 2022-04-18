@@ -84,37 +84,41 @@ function MyBets() {
 				}
 			})
 			.then(async (data) => {
-				const reduceData = await data.map(
-					({
-						date_placed,
-						bookmaker,
-						name,
-						bet_type,
-						sport,
-						league,
-						event_finish,
-						wager,
-						odds,
-						pot_win,
-						bet_result,
-						notes,
-						id,
-					}) => ({
-						date_placed,
-						bookmaker,
-						name,
-						bet_type,
-						sport,
-						league,
-						event_finish,
-						wager,
-						odds,
-						pot_win,
-						bet_result,
-						notes,
-						id,
-					})
-				);
+				const reduceData = await data
+					.map(
+						({
+							date_placed,
+							bookmaker,
+							name,
+							bet_type,
+							sport,
+							league,
+							event_finish,
+							wager,
+							odds,
+							pot_win,
+							bet_result,
+							notes,
+							id,
+						}) => ({
+							date_placed,
+							bookmaker,
+							name,
+							bet_type,
+							sport,
+							league,
+							event_finish,
+							wager,
+							odds,
+							pot_win,
+							bet_result,
+							notes,
+							id,
+						})
+					)
+					.sort(function (a, b) {
+						return new Date(a.date_placed) - new Date(b.date_placed);
+					});
 				await console.log("reduce data");
 				await setTableData(reduceData);
 				await console.log(tableData);
@@ -168,7 +172,7 @@ function MyBets() {
 							</tr>
 						</thead>
 						<tbody>
-							{tableData.map((row) => (
+							{tableData.reverse().map((row) => (
 								<Bet
 									row={row}
 									showEditModal={showEditModal}

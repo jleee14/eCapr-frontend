@@ -104,15 +104,15 @@ function EditModal({ betId, showEditModal }) {
 								value={bet.bet_type}
 							>
 								<option value="">Select Bet Type</option>
-								<option value="parlay">Parlay</option>
-								<option value="future">Futures</option>
-								<option value="moneyline">Money Line</option>
-								<option value="overunder">Totals: Over/Under</option>
-								<option value="teaser">Teaser</option>
-								<option value="playerprop">Player Prop</option>
-								<option value="teamprop">Team Prop</option>
-								<option value="otherprop">Other Prop</option>
-								<option value="futures">Futures/Outright</option>
+								<option value="Parlay">Parlay</option>
+								<option value="Futures">Futures</option>
+								<option value="Moneyline">Money Line</option>
+								<option value="Over Under">Totals: Over/Under</option>
+								<option value="Teaser">Teaser</option>
+								<option value="Player Prop">Player Prop</option>
+								<option value="Team Prop">Team Prop</option>
+								<option value="Other Prop">Other Prop</option>
+								<option value="Live Bet">Live Bet</option>
 							</select>
 						</div>
 						<div className="bet-parameter">
@@ -150,19 +150,19 @@ function EditModal({ betId, showEditModal }) {
 								value={bet.sport}
 							>
 								<option value="">Choose an option below</option>
-								<option value="basketball">Basketball</option>
-								<option value="baseball">Baseball</option>
-								<option value="football">American Football</option>
-								<option value="soccer">Football</option>
-								<option value="golf">Golf</option>
-								<option value="tennis">Tennis</option>
-								<option value="mma">MMA</option>
-								<option value="boxing">Boxing</option>
-								<option value="hockey">Hockey</option>
-								<option value="horseracing">Horse Racing</option>
-								<option value="esports">ESports</option>
-								<option value="cricket">Cricket</option>
-								<option value="rugby">Rugby</option>
+								<option value="Basketball">Basketball</option>
+								<option value="Baseball">Baseball</option>
+								<option value="Football">American Football</option>
+								<option value="Soccer">Football</option>
+								<option value="Golf">Golf</option>
+								<option value="Tennis">Tennis</option>
+								<option value="MMA">MMA</option>
+								<option value="Boxing">Boxing</option>
+								<option value="Hockey">Hockey</option>
+								<option value="Horseracing">Horse Racing</option>
+								<option value="eSports">ESports</option>
+								<option value="Cricket">Cricket</option>
+								<option value="Rugby">Rugby</option>
 							</select>
 						</div>
 						<div className="bet-parameter">
