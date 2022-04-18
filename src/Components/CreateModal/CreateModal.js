@@ -46,6 +46,7 @@ function CreateModal({ showAddModal }) {
 	async function calculateReturn(event) {
 		if (bet.odds < -99) {
 			let pot_win = (await (100 / Math.abs(bet.odds))) * bet.wager;
+			pot_win = await pot_win.toFixed(2);
 			await setBetReturn(pot_win.toFixed(2));
 			await setBet({ ...bet, pot_win: pot_win });
 		} else {
