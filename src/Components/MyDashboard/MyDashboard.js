@@ -4,8 +4,14 @@ import Metrics from "../Metrics/Metrics";
 import API_URL from "../../apiConfig";
 import "./MyDashboard.css";
 
-function MyDashboard({ userid }) {
+function MyDashboard() {
+	const initialUserStats = {
+		car_profit: 0,
+		avg_bet: 0,
+	};
 	const [showNav, setShowNav] = useState(false);
+	const [userStats, setUserStats] = useState(initialUserStats);
+	const [betData, setBetData] = useState([]);
 	const [userOutBetData, setUserOutBetData] = useState([]);
 	const [userResBetData, setUserResBetData] = useState([]);
 	const [userData, setUserData] = useState({});
@@ -24,6 +30,7 @@ function MyDashboard({ userid }) {
 
 			if (response.status === 200) {
 				const data = await response.json();
+				await setBetData(data);
 				const outData = await data
 					.filter((bet) => bet.bet_result === "None")
 					.map(({ event_finish, name, bet_type, wager, odds, pot_win }) => ({
@@ -87,17 +94,38 @@ function MyDashboard({ userid }) {
 			}
 		} catch (error) {}
 	}
+
+	function calculateProfits() {
+		const careerProfit = userResBetData
+			.reduce((accum, bet) => accum + parseFloat(bet.profit), 0)
+			.toFixed(2);
+		const totalBetVol = betData.reduce(
+			(accum, bet) => accum + parseFloat(bet.wager),
+			0
+		);
+		const avgBetSize = (totalBetVol / betData.length).toFixed(2);
+		setUserStats({
+			...userStats,
+			car_profit: careerProfit,
+			avg_bet: avgBetSize,
+		});
+	}
+
 	useEffect(() => {
 		getBetData();
 		getUserID();
 		console.log("run dashboard useEffect");
 	}, []);
 
+	useEffect(() => {
+		calculateProfits();
+	}, [userResBetData]);
+
 	return (
 		<div className="dashboard-container">
 			<div className="dashboard-top-container">
 				<Graph />
-				<Metrics userData={userData} />
+				<Metrics userData={userData} userStats={userStats} />
 			</div>
 			<div className="dashboard-bottom-container">
 				<div className="outstanding-bets-container">

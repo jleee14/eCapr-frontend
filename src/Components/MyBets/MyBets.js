@@ -10,7 +10,6 @@ function MyBets() {
 	const [addModalToggle, setAddModalToggle] = useState(false);
 	const [editModalToggle, setEditModalToggle] = useState(false);
 	const [resModalToggle, setResModalToggle] = useState(false);
-	const [showNav, setShowNav] = useState(false);
 	const [userBetData, setUserBetData] = useState([]);
 	const [betId, setBetId] = useState(null);
 	const [tableData, setTableData] = useState([]);
@@ -25,23 +24,66 @@ function MyBets() {
 	function showResolveModal(event) {
 		setResModalToggle(!resModalToggle);
 	}
-	function toggleNav(event) {
-		setShowNav(!showNav);
-	}
 
 	function deleteLoad(event) {
 		setDelListen(!delListen);
 	}
 
-	async function getBetData() {
+	async function calculateUserData() {
 		try {
-			const response = await fetch(API_URL + "bets/", {
-				headers: {
-					Authorization: `Token ${localStorage.getItem("token")}`,
-				},
-			});
-			if (response.status === 200) {
-				const data = await response.json();
+			await console.log("calc begin");
+			if (tableData.length !== 0) {
+				const userWins = await tableData.filter(
+					(bet) => bet.bet_result === "win"
+				).length;
+				await console.log(userWins);
+				const userLosses = await tableData.filter(
+					(bet) => bet.bet_result === "loss"
+				).length;
+				await console.log(userLosses);
+				const userPushes = await tableData.filter(
+					(bet) => bet.bet_result === "push"
+				).length;
+				await console.log(userPushes);
+				await console.log("set data");
+
+				const response = await fetch(API_URL + `users/me/`, {
+					method: "PATCH",
+					body: JSON.stringify({
+						wins: userWins,
+						losses: userLosses,
+						pushes: userPushes,
+					}),
+					headers: {
+						Authorization: `Token ${localStorage.getItem("token")}`,
+						"content-type": "application/json",
+					},
+				});
+				if (response.status === 200) {
+					await console.log("user updated");
+				} else {
+					console.log("error");
+				}
+				return;
+			} else {
+				console.log("empty data");
+				return;
+			}
+		} catch (error) {}
+	}
+
+	async function getBetData() {
+		fetch(API_URL + "bets/", {
+			headers: {
+				Authorization: `Token ${localStorage.getItem("token")}`,
+			},
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					return response.json();
+				}
+			})
+			.then(async (data) => {
 				const reduceData = await data.map(
 					({
 						date_placed,
@@ -54,6 +96,7 @@ function MyBets() {
 						wager,
 						odds,
 						pot_win,
+						bet_result,
 						notes,
 						id,
 					}) => ({
@@ -67,21 +110,27 @@ function MyBets() {
 						wager,
 						odds,
 						pot_win,
+						bet_result,
 						notes,
 						id,
 					})
 				);
-				setUserBetData(data);
-				setTableData(reduceData);
-			}
-		} catch (error) {
-			console.log("error");
-		}
+				await console.log("reduce data");
+				await setTableData(reduceData);
+				await console.log(tableData);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	useEffect(() => {
 		getBetData();
 	}, [addModalToggle, editModalToggle, resModalToggle, delListen]);
+
+	useEffect(() => {
+		calculateUserData();
+	}, [tableData]);
 
 	return (
 		<>
@@ -113,6 +162,7 @@ function MyBets() {
 								<th>Wager Amount</th>
 								<th>Odds</th>
 								<th>Potential Return</th>
+								<th>Bet Result</th>
 								<th>Notes</th>
 								<th>Actions</th>
 							</tr>

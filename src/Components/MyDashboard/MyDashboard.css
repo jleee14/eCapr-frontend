@@ -28,6 +28,10 @@ tr>th {
     padding: .25rem;
 }
 
+td {
+    font-size: .875rem;
+}
+
 .win-container, .loss-container {
     background-color: white;
     border-radius: 1.5rem;

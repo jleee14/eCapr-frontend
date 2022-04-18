@@ -46,7 +46,9 @@ function ResModal({ betId, showResolveModal }) {
 				},
 			});
 			if (response.status === 200) {
-				showResolveModal();
+				setTimeout(() => {
+					showResolveModal();
+				}, 1000);
 			}
 		} catch (error) {}
 	}

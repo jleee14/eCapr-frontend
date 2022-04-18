@@ -36,7 +36,9 @@ function CreateModal({ showAddModal }) {
 				},
 			});
 			if (response.status === 201) {
-				showAddModal();
+				setTimeout(() => {
+					showAddModal();
+				}, 500);
 			}
 		} catch (error) {}
 	}

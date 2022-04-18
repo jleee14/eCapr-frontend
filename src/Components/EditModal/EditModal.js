@@ -22,7 +22,9 @@ function EditModal({ betId, showEditModal }) {
 				},
 			});
 			if (response.status === 200) {
-				showEditModal();
+				setTimeout(() => {
+					showEditModal();
+				}, 500);
 			}
 		} catch (error) {}
 	}
