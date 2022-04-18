@@ -56,10 +56,23 @@
     font-size: 1.5rem;
     padding: 2rem 0;
     font-weight: 700;
+    transition: transform .2s ease-in-out;
+    width: 80%;
+    text-align: center;
+    
+}
+
+.link-container:hover {
+    border-left:3px solid #51f1b6;
+    background-color:#314b6f;
+    transform: scale(1.05);
 }
 
 .links-container > a {
     text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 i {
@@ -69,6 +82,10 @@ i {
 
 .links-container {
     padding-bottom: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .logout-container {
@@ -110,9 +127,7 @@ i {
 .short-link-container {
     cursor: pointer;
 }
-.short-link-container > i {
-    padding-left: .75rem;
-}
+
 
 /* CSS STYLES */
 

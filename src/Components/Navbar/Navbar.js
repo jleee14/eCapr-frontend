@@ -31,7 +31,7 @@ function Navbar({ handleLogout, userInfo }) {
 				<div className="user-container animate__animated animate__fadeIn">
 					<div className="circle-container">
 						Welcome, <br />
-						{userInfo.username}
+						{localStorage.getItem("user")}
 					</div>
 					<button className="logout-container" onClick={handleLogout}>
 						Logout
