@@ -67,6 +67,12 @@ function Login({ handleSetLoggedIn }) {
 								placeholder="Password"
 								required
 							/>
+							{error && (
+								<p>
+									Invalid user credentials. Please re-enter your username and
+									password.
+								</p>
+							)}
 							<button id="login-button" type="submit">
 								Log In
 							</button>
