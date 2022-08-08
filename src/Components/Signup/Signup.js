@@ -112,9 +112,9 @@ function Signup(props) {
 							)}
 							{signupErrors && (
 								<div className="signup-error-container">
-									{signupErrors.map((errormsg) => {
-										return <p className="signup-error-msg">{errormsg}</p>;
-									})}
+									{signupErrors.map((errormsg) => (
+										<p className="signup-error-msg">{errormsg}</p>
+									))}
 								</div>
 							)}
 							<button className="signup-button" type="submit">

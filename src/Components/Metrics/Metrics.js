@@ -21,7 +21,7 @@ function Metrics({ userData, userStats }) {
 				<div className="stat-container">
 					<h4 className="stat-cat-header">Average bet size: </h4>
 					<p className="stat-data">
-						{!userStats.avg_bet ? "$0.00" : `$${userStats.avg_bet}`}
+						{userStats.avg_bet === "NaN" ? "$0.00" : `$${userStats.avg_bet}`}
 					</p>
 				</div>
 				<div className="stat-container">
