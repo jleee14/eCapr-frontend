@@ -155,7 +155,7 @@ function CreateModal({ showAddModal }) {
 								<option value="Soccer">Football</option>
 								<option value="Golf">Golf</option>
 								<option value="Tennis">Tennis</option>
-								<option value="Mma">MMA</option>
+								<option value="MMA">MMA</option>
 								<option value="Boxing">Boxing</option>
 								<option value="Hockey">Hockey</option>
 								<option value="Horseracing">Horse Racing</option>

@@ -37,7 +37,7 @@ function Signup(props) {
 				setSuccess(true);
 				setTimeout(() => {
 					navigate("/login");
-				}, 3000);
+				}, 3500);
 			} else if (response.status === 400) {
 				const data = await response.json();
 				const errors = [];
@@ -108,6 +108,13 @@ function Signup(props) {
 							{serverError && (
 								<div className="server-error-signup">
 									Oops! Something went wrong! Please try again later.
+								</div>
+							)}
+							{signupErrors && (
+								<div className="signup-error-container">
+									{signupErrors.map((errormsg) => {
+										return <p className="signup-error-msg">{errormsg}</p>;
+									})}
 								</div>
 							)}
 							<button className="signup-button" type="submit">
