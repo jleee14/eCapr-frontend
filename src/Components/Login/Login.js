@@ -24,7 +24,10 @@ function Login({ handleSetLoggedIn }) {
 				body: JSON.stringify(formData),
 				headers: {
 					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
 				},
+				mode: "no-cors",
 			});
 
 			if (response.status === 200) {

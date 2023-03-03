@@ -5,6 +5,7 @@ import "./MyBets.css";
 import Bet from "../Bet/Bet";
 import ResModal from "../ResModal/ResModal";
 import API_URL from "../../apiConfig";
+import { local } from "d3";
 
 function MyBets() {
 	const [addModalToggle, setAddModalToggle] = useState(false);
@@ -44,18 +45,21 @@ function MyBets() {
 					(bet) => bet.bet_result === "push"
 				).length;
 
-				const response = await fetch(API_URL + `users/me/`, {
-					method: "PATCH",
-					body: JSON.stringify({
-						wins: userWins,
-						losses: userLosses,
-						pushes: userPushes,
-					}),
-					headers: {
-						Authorization: `Token ${localStorage.getItem("token")}`,
-						"content-type": "application/json",
-					},
-				});
+				const response = await fetch(
+					API_URL + `users/` + localStorage.getItem("id"),
+					{
+						method: "PATCH",
+						body: JSON.stringify({
+							wins: userWins,
+							losses: userLosses,
+							pushes: userPushes,
+						}),
+						headers: {
+							Authorization: `Token ${localStorage.getItem("token")}`,
+							"content-type": "application/json",
+						},
+					}
+				);
 				if (response.status === 200) {
 					await console.log("user updated");
 				} else {

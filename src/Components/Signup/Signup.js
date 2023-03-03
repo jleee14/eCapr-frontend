@@ -37,7 +37,7 @@ function Signup(props) {
 				setSuccess(true);
 				setTimeout(() => {
 					navigate("/login");
-				}, 3500);
+				}, 5000);
 			} else if (response.status === 400) {
 				const data = await response.json();
 				const errors = [];
@@ -98,7 +98,7 @@ function Signup(props) {
 								required
 							/>
 							{success && (
-								<div className="success-signup">
+								<div className="success-signup sub-message-container">
 									{" "}
 									Success! Welcome to eCapr! You will be redirected shortly.
 									Please click this <Link to="/dashboard">link</Link> if you are
@@ -111,7 +111,7 @@ function Signup(props) {
 								</div>
 							)}
 							{signupErrors && (
-								<div className="signup-error-container">
+								<div className="signup-error-container sub-message-container">
 									{signupErrors.map((errormsg) => (
 										<p className="signup-error-msg">{errormsg}</p>
 									))}
